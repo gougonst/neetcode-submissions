@@ -1,0 +1,17 @@
+class Solution:
+    def generateParenthesis(self, n: int) -> List[str]:
+        parentheses = []
+
+        def backtrack(parenthesis: str, status: int, used: int) -> None:
+            if not status and used == n:
+                parentheses.append(parenthesis)
+                return
+
+            if not status or used < n:
+                backtrack(parenthesis + '(', status + 1, used + 1)
+            
+            if status:
+                backtrack(parenthesis + ')', status - 1, used)
+
+        backtrack("", 0, 0)
+        return parentheses
